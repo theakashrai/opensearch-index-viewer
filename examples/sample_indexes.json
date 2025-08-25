@@ -1,0 +1,193 @@
+{
+  "symbols-active": {
+    "aliases": {},
+    "mappings": {
+      "properties": {
+        "alternateExchange": {
+          "type": "text",
+          "analyzer": "alt_exchange_analyzer",
+          "search_analyzer": "description_analyzer"
+        },
+        "alternateSymbol": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "category": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "currency": {
+          "type": "keyword"
+        },
+        "dataVendor": {
+          "type": "text",
+          "fields": {
+            "autocomplete": {
+              "type": "text",
+              "analyzer": "autocomplete_analyzer",
+              "search_analyzer": "description_analyzer"
+            },
+            "keyword": {
+              "type": "keyword"
+            }
+          },
+          "analyzer": "description_analyzer"
+        },
+        "dateCreated": {
+          "type": "date"
+        },
+        "exchangeCode": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          },
+          "analyzer": "autocomplete_analyzer",
+          "search_analyzer": "symbol_analyzer"
+        },
+        "fidGroup": {
+          "type": "keyword",
+          "index": false,
+          "doc_values": false
+        },
+        "symbolId": {
+          "type": "text",
+          "fields": {
+            "autocomplete": {
+              "type": "text",
+              "analyzer": "autocomplete_analyzer",
+              "search_analyzer": "symbol_analyzer"
+            },
+            "keyword": {
+              "type": "keyword",
+              "normalizer": "lowercase_normalizer"
+            }
+          },
+          "analyzer": "symbol_analyzer"
+        },
+        "strike": {
+          "type": "float"
+        },
+        "session": {
+          "type": "long"
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_shards": "2",
+        "provided_name": "symbols-active",
+        "creation_date": "1751639018752",
+        "analysis": {
+          "normalizer": {
+            "lowercase_normalizer": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom"
+            }
+          },
+          "analyzer": {
+            "alt_exchange_analyzer": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "tokenizer": "pipe_delimited_tokenizer"
+            },
+            "autocomplete_analyzer": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "tokenizer": "autocomplete_tokenizer"
+            },
+            "description_analyzer": {
+              "filter": [
+                "lowercase",
+                "stemmer",
+                "stop"
+              ],
+              "type": "custom",
+              "tokenizer": "standard"
+            },
+            "symbol_analyzer": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "tokenizer": "whitespace"
+            }
+          },
+          "tokenizer": {
+            "autocomplete_tokenizer": {
+              "token_chars": [
+                "letter",
+                "digit"
+              ],
+              "min_gram": "2",
+              "type": "edge_ngram",
+              "max_gram": "20"
+            },
+            "pipe_delimited_tokenizer": {
+              "pattern": "\\|",
+              "type": "pattern"
+            }
+          }
+        },
+        "number_of_replicas": "0",
+        "uuid": "XuXS1ZcBgTrBcyv7TKue"
+      }
+    }
+  },
+  "products-index": {
+    "aliases": {},
+    "mappings": {
+      "properties": {
+        "productId": {
+          "type": "keyword"
+        },
+        "name": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "description": {
+          "type": "text",
+          "analyzer": "english"
+        },
+        "price": {
+          "type": "double"
+        },
+        "category": {
+          "type": "keyword"
+        },
+        "tags": {
+          "type": "keyword"
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "1",
+        "creation_date": "1751639018752"
+      }
+    }
+  }
+}
