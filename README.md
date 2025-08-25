@@ -65,11 +65,13 @@ poetry run osiv view your_index_data.json
 ## 📋 Features
 
 ### 1. **Index Overview**
+
 - Field count, shards, replicas
 - Creation date and UUID
 - Clean, at-a-glance summary
 
 ### 2. **Field Tree View**
+
 - Hierarchical display of all fields
 - Type indicators with emojis (📝 text, 🔤 keyword, 📅 date, etc.)
 - Analyzer information
@@ -77,26 +79,31 @@ poetry run osiv view your_index_data.json
 - Special properties (not indexed, no doc values)
 
 ### 3. **Field Types Summary**
+
 - Count and percentage of each field type
 - Examples of fields for each type
 - Quick understanding of index composition
 
 ### 4. **Analyzer Analysis**
+
 - Custom analyzer configurations
 - Tokenizer and filter information
 - Clear table format
 
 ### 5. **Search & Filter**
+
 - Regex pattern search across field names
 - Find specific fields quickly
 - Filter results by properties
 
 ### 6. **Index Comparison**
+
 - Side-by-side comparison of two indexes
 - Spot differences in configuration
 - Understand structural differences
 
 ### 7. **Clean JSON Export**
+
 - Machine-readable summary export
 - Structured data for further analysis
 - Clean format without unnecessary nesting

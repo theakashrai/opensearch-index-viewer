@@ -1,14 +1,12 @@
 {
-  "symbols-active": {
+  "user-profiles": {
     "aliases": {},
     "mappings": {
       "properties": {
-        "alternateExchange": {
-          "type": "text",
-          "analyzer": "alt_exchange_analyzer",
-          "search_analyzer": "description_analyzer"
+        "userId": {
+          "type": "keyword"
         },
-        "alternateSymbol": {
+        "username": {
           "type": "text",
           "fields": {
             "keyword": {
@@ -17,77 +15,64 @@
             }
           }
         },
-        "category": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword"
-            }
-          }
-        },
-        "currency": {
+        "email": {
           "type": "keyword"
         },
-        "dataVendor": {
+        "firstName": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "lastName": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "fullName": {
           "type": "text",
           "fields": {
             "autocomplete": {
               "type": "text",
               "analyzer": "autocomplete_analyzer",
-              "search_analyzer": "description_analyzer"
+              "search_analyzer": "standard"
             },
             "keyword": {
               "type": "keyword"
             }
           },
-          "analyzer": "description_analyzer"
+          "analyzer": "standard"
         },
         "dateCreated": {
           "type": "date"
         },
-        "exchangeCode": {
-          "type": "text",
-          "fields": {
-            "keyword": {
+        "lastLogin": {
+          "type": "date"
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "theme": {
               "type": "keyword"
-            }
-          },
-          "analyzer": "autocomplete_analyzer",
-          "search_analyzer": "symbol_analyzer"
-        },
-        "fidGroup": {
-          "type": "keyword",
-          "index": false,
-          "doc_values": false
-        },
-        "symbolId": {
-          "type": "text",
-          "fields": {
-            "autocomplete": {
-              "type": "text",
-              "analyzer": "autocomplete_analyzer",
-              "search_analyzer": "symbol_analyzer"
             },
-            "keyword": {
-              "type": "keyword",
-              "normalizer": "lowercase_normalizer"
+            "language": {
+              "type": "keyword"
+            },
+            "notifications": {
+              "type": "boolean"
             }
-          },
-          "analyzer": "symbol_analyzer"
+          }
         },
-        "strike": {
-          "type": "float"
-        },
-        "session": {
-          "type": "long"
+        "tags": {
+          "type": "keyword"
         }
       }
     },
     "settings": {
       "index": {
         "number_of_shards": "2",
-        "provided_name": "symbols-active",
-        "creation_date": "1751639018752",
+        "provided_name": "user-profiles",
+        "creation_date": "1640995200000",
         "analysis": {
           "normalizer": {
             "lowercase_normalizer": {
@@ -98,35 +83,12 @@
             }
           },
           "analyzer": {
-            "alt_exchange_analyzer": {
-              "filter": [
-                "lowercase"
-              ],
-              "type": "custom",
-              "tokenizer": "pipe_delimited_tokenizer"
-            },
             "autocomplete_analyzer": {
               "filter": [
                 "lowercase"
               ],
               "type": "custom",
               "tokenizer": "autocomplete_tokenizer"
-            },
-            "description_analyzer": {
-              "filter": [
-                "lowercase",
-                "stemmer",
-                "stop"
-              ],
-              "type": "custom",
-              "tokenizer": "standard"
-            },
-            "symbol_analyzer": {
-              "filter": [
-                "lowercase"
-              ],
-              "type": "custom",
-              "tokenizer": "whitespace"
             }
           },
           "tokenizer": {
@@ -138,19 +100,15 @@
               "min_gram": "2",
               "type": "edge_ngram",
               "max_gram": "20"
-            },
-            "pipe_delimited_tokenizer": {
-              "pattern": "\\|",
-              "type": "pattern"
             }
           }
         },
         "number_of_replicas": "0",
-        "uuid": "XuXS1ZcBgTrBcyv7TKue"
+        "uuid": "abc123def456ghi789jkl"
       }
     }
   },
-  "products-index": {
+  "e-commerce-catalog": {
     "aliases": {},
     "mappings": {
       "properties": {
@@ -179,6 +137,12 @@
         },
         "active": {
           "type": "boolean"
+        },
+        "brand": {
+          "type": "keyword"
+        },
+        "inventory": {
+          "type": "integer"
         }
       }
     },
@@ -186,7 +150,55 @@
       "index": {
         "number_of_shards": "1",
         "number_of_replicas": "1",
-        "creation_date": "1751639018752"
+        "creation_date": "1640995200000"
+      }
+    }
+  },
+  "blog-posts": {
+    "aliases": {},
+    "mappings": {
+      "properties": {
+        "postId": {
+          "type": "keyword"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "standard",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "content": {
+          "type": "text",
+          "analyzer": "english"
+        },
+        "author": {
+          "type": "keyword"
+        },
+        "publishDate": {
+          "type": "date"
+        },
+        "tags": {
+          "type": "keyword"
+        },
+        "category": {
+          "type": "keyword"
+        },
+        "viewCount": {
+          "type": "integer"
+        },
+        "featured": {
+          "type": "boolean"
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "creation_date": "1640995200000"
       }
     }
   }
